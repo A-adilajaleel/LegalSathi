@@ -48,7 +48,12 @@ GROQ_API_KEY=your_groq_api_key_here
 
 ## 📸 Screenshots
 
-Coming soon!
+
+### Home Page
+![Home](assets/home.png)
+
+### Result Page
+![Result](assets/result.png)
 
 ## 👨‍💻 Built by
 
