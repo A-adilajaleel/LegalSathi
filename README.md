@@ -2,6 +2,12 @@
 
 AI-powered legal document simplifier for common people.
 
+
+## 🌐 Live Demo
+
+👉 [https://legal-sathi-eight.vercel.app/](https://legal-sathi-eight.vercel.app/)
+
+
 ## 🔍 What is LegalSathi?
 
 LegalSathi lets anyone upload a legal document (PDF or image) and instantly understand it in simple English, Hindi, or Malayalam — no lawyer needed!
