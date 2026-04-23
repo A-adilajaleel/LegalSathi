@@ -15,7 +15,7 @@ function UploadSection({ setResult }) {
     formData.append('language', language)
 
     try {
-      const res = await axios.post('http://localhost:8000/api/analyze/', formData)
+      const res = await axios.post('https://legalsathi-backend.onrender.com/api/analyze/', formData)
       setResult(res.data)
     } catch (err) {
       alert('Something went wrong!')
