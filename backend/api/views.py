@@ -17,22 +17,68 @@ def extract_text_from_pdf(file):
 
 def get_prompt(language):
     prompts = {
-        'english': """You are LegalSathi AI. Analyze this legal document and explain it in very simple English that a common person can understand. 
-        Structure your response as:
-        1. What is this document?
-        2. Key points (simple bullets)
-        3. Important things to note
-        4. Any risks or warnings""",
-        'hindi': """आप LegalSathi AI हैं। इस legal document को analyze करें और बहुत सरल हिंदी में समझाएं।
-        1. यह document क्या है?
-        2. मुख्य बातें
-        3. जरूरी बातें
-        4. कोई खतरा या चेतावनी""",
-        'malayalam': """നിങ്ങൾ LegalSathi AI ആണ്. ഈ legal document സാധാരണ Malayalam-ൽ വിശദീകരിക്കൂ.
-        1. ഈ document എന്താണ്?
-        2. പ്രധാന കാര്യങ്ങൾ
-        3. ശ്രദ്ധിക്കേണ്ട കാര്യങ്ങൾ
-        4. Risks അല്ലെങ്കിൽ warnings"""
+        'english': """You are LegalSathi AI. Your job is to help common people understand legal documents.
+
+Explain this document as if you're talking to a farmer, student, or common person who has never read a legal document before. Use very simple everyday words. No legal jargon at all.
+
+Format your response exactly like this:
+
+📄 **What is this document?**
+(One simple sentence — what is this about?)
+
+👥 **Who is involved?**
+(Names and roles in simple words)
+
+✅ **What does this mean for you?**
+(Simple bullet points — what you get, what you must do)
+
+⚠️ **Important warnings before signing:**
+(What to be careful about)
+
+🔍 **Line by line — key points explained:**
+(Explain each important section in 1-2 simple sentences)""",
+
+        'hindi': """आप LegalSathi AI हैं। आपका काम है आम लोगों को legal documents समझाना।
+
+इस document को ऐसे समझाएं जैसे आप एक किसान, student, या आम इंसान से बात कर रहे हैं जिसने कभी legal document नहीं पढ़ा। बिल्कुल simple भाषा में।
+
+इस format में जवाब दें:
+
+📄 **यह document क्या है?**
+(एक simple sentence में)
+
+👥 **इसमें कौन-कौन है?**
+(नाम और role simple में)
+
+✅ **आपके लिए इसका मतलब क्या है?**
+(Simple points — आपको क्या मिलेगा, क्या करना होगा)
+
+⚠️ **Sign करने से पहले ध्यान दें:**
+(क्या सावधानी रखें)
+
+🔍 **Line by line — मुख्य बातें:**
+(हर important section को 1-2 simple sentences में समझाएं)""",
+
+        'malayalam': """നിങ്ങൾ LegalSathi AI ആണ്. നിങ്ങളുടെ ജോലി സാധാരണക്കാർക്ക് legal documents മനസ്സിലാക്കി കൊടുക്കുക എന്നതാണ്.
+
+ഈ document ഒരിക്കലും legal document വായിച്ചിട്ടില്ലാത്ത ഒരു കർഷകന്, student, അല്ലെങ്കിൽ സാധാരണ മനുഷ്യന് മനസ്സിലാകുന്ന രീതിയിൽ explain ചെയ്യൂ. Legal terms ഒരിക്കലും ഉപയോഗിക്കരുത്. നാട്ടുഭാഷയിൽ സംസാരിക്കുന്നത് പോലെ explain ചെയ്യൂ.
+
+ഈ format-ൽ മറുപടി നൽകൂ:
+
+📄 **ഈ document എന്താണ്?**
+(ഒരു simple sentence — ഇത് എന്തിനെ കുറിച്ചാണ്?)
+
+👥 **ആരൊക്കെ ഉണ്ട്?**
+(പേരുകളും roles-ഉം simple ആയി)
+
+✅ **നിനക്ക് ഇതിന്റെ അർത്ഥം എന്താണ്?**
+(Simple points — നിനക്ക് എന്ത് കിട്ടും, നീ എന്ത് ചെയ്യണം)
+
+⚠️ **Sign ചെയ്യുന്നതിന് മുമ്പ് ശ്രദ്ധിക്കൂ:**
+(എന്തൊക്കെ careful ആയി നോക്കണം)
+
+🔍 **Line by line — പ്രധാന ഭാഗങ്ങൾ explained:**
+(ഓരോ important section-ഉം 1-2 simple sentences-ൽ explain ചെയ്യൂ)"""
     }
     return prompts.get(language, prompts['english'])
 
@@ -51,7 +97,6 @@ def analyze_document(request):
 
         prompt = get_prompt(language)
 
-        # PDF or Image — text extract ചെയ്യുന്നു
         if file.name.lower().endswith('.pdf'):
             print("Processing PDF...")
             text = extract_text_from_pdf(file)
@@ -59,7 +104,6 @@ def analyze_document(request):
                 return Response({'error': 'Could not extract text from PDF'}, status=400)
         else:
             print("Processing Image...")
-            # Image-നെ base64 ആക്കി text ആയി treat ചെയ്യുന്നു
             image_bytes = file.read()
             image_base64 = base64.b64encode(image_bytes).decode('utf-8')
             text = f"[This is an image document - base64: {image_base64[:100]}... Please analyze as a legal document image]"
@@ -75,7 +119,7 @@ def analyze_document(request):
                     "content": full_prompt
                 }
             ],
-            max_tokens=2000,
+            max_tokens=4000,
             temperature=0.3
         )
 
