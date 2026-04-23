@@ -33,10 +33,7 @@ Format your response exactly like this:
 (Simple bullet points — what you get, what you must do)
 
 ⚠️ **Important warnings before signing:**
-(What to be careful about)
-
-🔍 **Line by line — key points explained:**
-(Explain each important section in 1-2 simple sentences)""",
+(What to be careful about)""",
 
         'hindi': """आप LegalSathi AI हैं। आपका काम है आम लोगों को legal documents समझाना।
 
@@ -54,10 +51,7 @@ Format your response exactly like this:
 (Simple points — आपको क्या मिलेगा, क्या करना होगा)
 
 ⚠️ **Sign करने से पहले ध्यान दें:**
-(क्या सावधानी रखें)
-
-🔍 **Line by line — मुख्य बातें:**
-(हर important section को 1-2 simple sentences में समझाएं)""",
+(क्या सावधानी रखें)""",
 
         'malayalam': """നിങ്ങൾ LegalSathi AI ആണ്. നിങ്ങളുടെ ജോലി സാധാരണക്കാർക്ക് legal documents മനസ്സിലാക്കി കൊടുക്കുക എന്നതാണ്.
 
@@ -75,10 +69,7 @@ Format your response exactly like this:
 (Simple points — നിനക്ക് എന്ത് കിട്ടും, നീ എന്ത് ചെയ്യണം)
 
 ⚠️ **Sign ചെയ്യുന്നതിന് മുമ്പ് ശ്രദ്ധിക്കൂ:**
-(എന്തൊക്കെ careful ആയി നോക്കണം)
-
-🔍 **Line by line — പ്രധാന ഭാഗങ്ങൾ explained:**
-(ഓരോ important section-ഉം 1-2 simple sentences-ൽ explain ചെയ്യൂ)"""
+(എന്തൊക്കെ careful ആയി നോക്കണം)"""
     }
     return prompts.get(language, prompts['english'])
 
@@ -102,6 +93,7 @@ def analyze_document(request):
             text = extract_text_from_pdf(file)
             if not text.strip():
                 return Response({'error': 'Could not extract text from PDF'}, status=400)
+            text = text[:6000]
         else:
             print("Processing Image...")
             image_bytes = file.read()
@@ -119,7 +111,7 @@ def analyze_document(request):
                     "content": full_prompt
                 }
             ],
-            max_tokens=4000,
+            max_tokens=2000,
             temperature=0.3
         )
 
