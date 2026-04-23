@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from django.conf import settings
 import PyPDF2
 
+
 client = Groq(api_key=settings.GROQ_API_KEY)
 
 def extract_text_from_pdf(file):
