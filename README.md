@@ -76,7 +76,6 @@ The system follows a structured pipeline:
 | Frontend | React + Vite + Tailwind CSS |
 | Backend | Django + Django REST Framework |
 | AI | Groq API (LLaMA 3.3 70B) |
-| OCR | (Mention tool if used, e.g. Tesseract) |
 | Languages | English, Hindi, Malayalam |
 
 ---
