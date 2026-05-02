@@ -1,24 +1,73 @@
 # ⚖️ LegalSathi AI
 
-AI-powered legal document simplifier for common people.
+A multilingual AI system that simplifies complex legal documents from PDFs and images using LLMs, OCR, and a translation pipeline.
 
+---
 
 ## 🌐 Live Demo
+👉 https://legal-sathi-eight.vercel.app/
 
-👉 [https://legal-sathi-eight.vercel.app/](https://legal-sathi-eight.vercel.app/)
+---
+
+## 🔍 Problem
+
+Legal documents are often:
+- Difficult to understand due to complex language
+- Not accessible to non-English speakers
+- Dependent on expensive legal consultation
+
+This creates a major barrier to **access to justice**.
+
+---
+
+## 💡 Solution
+
+LegalSathi enables users to:
+1. Upload a legal document (PDF or image)
+2. Extract and understand its content using AI
+3. Receive a simplified explanation in:
+   - English
+   - Hindi
+   - Malayalam
+
+---
+
+## ⚙️ System Architecture
 
 
-## 🔍 What is LegalSathi?
+User Upload (PDF/Image)
+↓
+OCR (Text Extraction)
+↓
+LLM Processing (LLaMA 3 via Groq)
+↓
+Legal Simplification
+↓
+Translation Pipeline
+↓
+Multilingual Output
 
-LegalSathi lets anyone upload a legal document (PDF or image) and instantly understand it in simple English, Hindi, or Malayalam — no lawyer needed!
+
+---
+
+## 🔄 Translation Pipeline
+
+The system follows a structured pipeline:
+1. Extract raw legal text from input
+2. Convert complex legal language → simple English using LLM
+3. Translate simplified output into Hindi and Malayalam
+
+---
 
 ## 🚀 Features
 
-- 📄 Upload PDF or scanned image documents
-- 🤖 AI-powered explanation using Groq (Llama 3)
-- 🌐 Supports English, Hindi & Malayalam
-- 🔒 Documents are never stored — privacy first
-- ⚡ Fast and free to use
+- 📄 Upload PDF or scanned legal documents
+- 🤖 AI-powered explanation using Groq (LLaMA 3.3 70B)
+- 🌐 Multilingual output (English, Hindi, Malayalam)
+- 🔒 Privacy-first: documents are not stored
+- ⚡ Fast response generation
+
+---
 
 ## 🛠️ Tech Stack
 
@@ -26,34 +75,13 @@ LegalSathi lets anyone upload a legal document (PDF or image) and instantly unde
 |-------|-----------|
 | Frontend | React + Vite + Tailwind CSS |
 | Backend | Django + Django REST Framework |
-| AI | Groq API (Llama 3.3 70B) |
+| AI | Groq API (LLaMA 3.3 70B) |
+| OCR | (Mention tool if used, e.g. Tesseract) |
 | Languages | English, Hindi, Malayalam |
 
-## ⚙️ Setup Instructions
-
-### Backend
-```bash
-cd backend
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
-python manage.py runserver
-```
-
-### Frontend
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-### Environment Variables
-Create a `.env` file in the `backend` folder:
-
-GROQ_API_KEY=your_groq_api_key_here
+---
 
 ## 📸 Screenshots
-
 
 ### Home Page
 ![Home](assets/home.png)
@@ -61,6 +89,26 @@ GROQ_API_KEY=your_groq_api_key_here
 ### Result Page
 ![Result](assets/result.png)
 
-## 👨‍💻 Built by
+---
+
+## ⚠️ Limitations & Risks
+
+- AI may generate incorrect or incomplete legal interpretations
+- Outputs should not be treated as professional legal advice
+- Risk of hallucination in LLM responses
+- Requires human/legal expert verification for critical use
+
+---
+
+## 🌍 Impact
+
+LegalSathi aims to:
+- Improve access to legal information
+- Reduce language barriers in law
+- Empower users without legal background
+
+---
+
+## 👨‍💻 Author
 
 Adila Jaleel — Full Stack Developer
